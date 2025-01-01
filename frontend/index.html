@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Find your next favorite book with our personalized book recommendation system.">
+    <title>Book Recommendation System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Welcome to the Book Recommendation System</h1>
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#recommendations">Recommendations</a></li>
+                <li><a href="#genres">Genres</a></li>
+                <li><a href="#books">All Books</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <h2>Discover Your Next Favorite Book</h2>
+                <div id="ai-recommendations">
+                    <h3>AI-Powered Book Recommendations</h3>
+                    <form id="ai-recommend-form">
+                        <div class="form-group">
+                            <label>Select Genres:</label>
+                            <div class="genre-checkboxes">
+                                <label><input type="checkbox" name="genres" value="Fiction"> Fiction</label>
+                                <label><input type="checkbox" name="genres" value="Non-Fiction"> Non-Fiction</label>
+                                <label><input type="checkbox" name="genres" value="Mystery"> Mystery</label>
+                                <label><input type="checkbox" name="genres" value="Science Fiction"> Science Fiction</label>
+                                <label><input type="checkbox" name="genres" value="Fantasy"> Fantasy</label>
+                                <label><input type="checkbox" name="genres" value="Romance"> Romance</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Publication Year:</label>
+                            <div class="range-inputs">
+                                <input type="number" name="min_year" placeholder="From" min="1900" max="2023">
+                                <input type="number" name="max_year" placeholder="To" min="1900" max="2023">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Minimum Rating:</label>
+                            <input type="number" name="min_rating" min="1" max="5" step="0.1" placeholder="3.0">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Select Tags:</label>
+                            <div class="tag-checkboxes">
+                                <label><input type="checkbox" name="tags" value="magic"> Magic</label>
+                                <label><input type="checkbox" name="tags" value="time-travel"> Time Travel</label>
+                                <label><input type="checkbox" name="tags" value="dragons"> Dragons</label>
+                                <label><input type="checkbox" name="tags" value="mystery"> Mystery</label>
+                                <label><input type="checkbox" name="tags" value="romance"> Romance</label>
+                                <label><input type="checkbox" name="tags" value="adventure"> Adventure</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Page Count:</label>
+                            <div class="range-inputs">
+                                <input type="number" name="min_pages" placeholder="Min" min="50">
+                                <input type="number" name="max_pages" placeholder="Max" min="51">
+                            </div>
+                        </div>
+
+                        <button type="submit">Get Recommendations</button>
+                    </form>
+                    
+                    <div id="ai-loading" style="display: none;">
+                        <p>Loading recommendations...</p>
+                        <div class="spinner"></div>
+                    </div>
+                    
+                    <div id="ai-recommendations"></div>
+                    
+                <p id="ai-recomandtions-p-down">Explore our curated list of book recommendations tailored just for you.</p>
+            </div>
+        </section>
+
+        <!-- Genres Section -->
+        <section id="genres" class="content-section">
+            <h2>Available Genres</h2>
+            <ul class="genre-list" id="genre-text">
+                <li>Loading genres...</li>
+            </ul>
+            <div id="genre-recommendations" class="content-section" style="display: none;">
+                <h3>Recommendations for <span id="selected-genre"></span></h3>
+                <div id="book-list" aria-live="polite">
+                    <p id="loading-message">Loading recommendations...</p>
+                    <div id="loading-spinner" style="display:none;">🔄</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- All Books Section -->
+        <section id="books" class="content-section">
+            <h2>All Books</h2>
+            <div id="all-books-list" aria-live="polite">
+                <p id="loading-all-books">Loading all books...</p>
+                <div id="loading-all-books-spinner" style="display:none;">🔄</div> <!-- Loading Spinner -->
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="content-section">
+            <h2>About Us</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Welcome to our Book Recommendation System, where literature meets technology. We are passionate about connecting readers with their next great read. Our platform combines the art of storytelling with the science of data analysis to provide personalized book suggestions.</p>
+                    <p>Our mission is to make book discovery easy and enjoyable. Whether you're a fan of classic literature, modern fiction, or non-fiction, we've got you covered. Our system uses advanced algorithms to analyze your reading preferences and suggest books you'll love.</p>
+                    <p>We believe that every reader is unique, and so should be their reading journey. That's why we've created a system that adapts to your tastes and helps you explore new genres and authors.</p>
+                </div>
+                <div class="about-features">
+                    <h3>Why Choose Us?</h3>
+                    <div class="feature-cards">
+                        <div class="feature-card">
+                            <h4>Personalized Recommendations</h4>
+                            <p>Get book suggestions tailored to your unique preferences and reading history.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Diverse Selection</h4>
+                            <p>Explore a wide range of genres and authors from around the world.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Up-to-date Library</h4>
+                            <p>Access our constantly updated database of the latest and greatest books.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>User-Friendly</h4>
+                            <p>Enjoy a seamless and intuitive interface designed for book lovers.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Community Insights</h4>
+                            <p>Benefit from community-driven reviews and ratings to make informed choices.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="content-section">
+            <h2>Contact Us</h2>
+            <form id="contact-form" aria-label="Contact form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required aria-required="true">
+        
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Your email" required aria-required="true">
+        
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" placeholder="Your message" required aria-required="true"></textarea>
+        
+                <button type="submit">Send</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2023 Book Recommendation System. All rights reserved.</p>
+        <nav aria-label="Footer navigation">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#recommendations">Recommendations</a></li>
+                <li><a href="#genres">Genres</a></li>
+                <li><a href="#books">All Books</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
